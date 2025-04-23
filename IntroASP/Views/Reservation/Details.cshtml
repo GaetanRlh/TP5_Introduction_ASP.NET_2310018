@@ -1,0 +1,32 @@
+﻿@model IntroASP.ViewModels.ReservationDetailsVM
+@{
+    ViewData["Title"] = "Confirmation de la réservation";
+}
+
+<div class="container">
+    <h1 class="text-center mb-4">@ViewData["Title"]</h1>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+    }
+    else if (Model != null)
+    {
+        <div class="row">
+            <div class="col-lg-6 d-none d-lg-block">
+                <img src="/img/Check.png" class="img-fluid rounded" alt="Confirmation Image" />
+            </div>
+            <div class="col-lg-6">
+                <p><strong>Nom :</strong> @Model.Name</p>
+                <p><strong>Courriel :</strong> @Model.Email</p>
+                <p><strong>Nombre de personnes :</strong> @Model.NumberOfPeople</p>
+                <p><strong>Date de réservation :</strong> @Model.ReservationDate.ToString("dddd dd MMMM yyyy à HH:mm")</p>
+                <p><strong>Menu choisi :</strong> @Model.MenuDescription</p>
+
+                <a asp-controller="Reservation" asp-action="Reservation" class="btn btn-secondary mt-3">
+                    <i class="fas fa-arrow-left"></i> Retour à l'accueil
+                </a>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,40 @@
+﻿@model Areas.Admin.ViewModels.ReservationListVM
+@{
+    ViewData["Title"] = "Liste des réservations";
+}
+
+<div class="container">
+    <h1 class="text-center mb-4">@ViewData["Title"]</h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th class="d-none d-md-table-cell">Courriel</th>
+                    <th>Date</th>
+                    <th>Nombre de personnes</th>
+                    <th>Choix de menu</th>
+                    <th class="text-end d-none d-sm-table-cell">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var reservation in Model.Reservations.OrderByDescending(r => r.ReservationDate))
+                {
+                    <tr>
+                        <td>@reservation.Name</td>
+                        <td class="d-none d-md-table-cell">@reservation.Email</td>
+                        <td>@reservation.ReservationDate.ToString("dd/MM/yyyy")</td>
+                        <td>@reservation.NumberOfPeople</td>
+                        <td>@reservation.MenuChoiceId</td>
+                        <td class="text-end d-none d-sm-table-cell">
+                            <a asp-action="Delete" asp-route-id="@reservation.Id" class="btn btn-danger" data-bs-toggle="tooltip" title="Supprimer">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

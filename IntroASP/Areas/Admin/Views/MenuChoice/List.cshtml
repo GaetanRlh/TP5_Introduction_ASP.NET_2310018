@@ -1,0 +1,41 @@
+﻿@model IntroASP.Areas.Admin.ViewModels.MenuListVM
+@{
+    ViewData["Title"] = "Gestion des choix de menu";
+}
+
+<div class="container">
+    <h1 class="text-center mb-4">@ViewData["Title"]</h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var menu in Model.Menus.OrderBy(m => m.Description))
+                {
+                    <tr>
+                        <td>@menu.Description</td>
+                        <td class="text-end">
+                            <a asp-action="Edit" asp-route-id="@menu.Id" class="btn btn-primary me-2" data-bs-toggle="tooltip" title="Modifier">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@menu.Id" class="btn btn-danger" data-bs-toggle="tooltip" title="Supprimer">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="mb-3">
+            <a asp-action="Create" class="btn btn-success">
+                <i class="fas fa-plus"></i> Ajouter un choix de menu
+            </a>
+        </div>
+    </div>
+</div>
